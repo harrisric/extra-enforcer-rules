@@ -38,20 +38,19 @@ import org.codehaus.plexus.component.repository.exception.ComponentLookupExcepti
 
 /**
  * Bans circular dependencies on the classpath.
- * 
- * @since 1.0-alpha-4
  */
 public class BanCircularDependencies
     implements EnforcerRule
 {
-    
+
     private transient DependencyGraphBuilder graphBuilder;
-    
+
     private String message;
-    
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public void execute( EnforcerRuleHelper helper )
         throws EnforcerRuleException
     {
@@ -79,7 +78,7 @@ public class BanCircularDependencies
         try
         {
             MavenProject project = (MavenProject) helper.evaluate( "${project}" );
-            
+
             Set<Artifact> artifacts = getDependenciesToCheck( project );
 
             if ( artifacts != null )
@@ -128,7 +127,7 @@ public class BanCircularDependencies
             log.warn( "Unable to detect Maven version. Please report this issue to the mojo@codehaus project" );
         }
     }
-    
+
     protected Set<Artifact> getDependenciesToCheck( MavenProject project )
     {
         Set<Artifact> dependencies = null;
@@ -144,10 +143,10 @@ public class BanCircularDependencies
         }
         return dependencies;
     }
-    
+
     private Set<Artifact> getAllDescendants( DependencyNode node )
     {
-        Set<Artifact> children = null; 
+        Set<Artifact> children = null;
         if( node.getChildren() != null )
         {
             children = new HashSet<Artifact>();
@@ -163,7 +162,7 @@ public class BanCircularDependencies
         }
         return children;
     }
-    
+
 
     private String getErrorMessage()
     {
@@ -176,6 +175,7 @@ public class BanCircularDependencies
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isCacheable()
     {
         return false;
@@ -184,6 +184,7 @@ public class BanCircularDependencies
     /**
      * {@inheritDoc}
      */
+    @Override
     public boolean isResultValid( EnforcerRule enforcerRule )
     {
         return false;
@@ -192,6 +193,7 @@ public class BanCircularDependencies
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getCacheId()
     {
         return "Does not matter as not cacheable";
