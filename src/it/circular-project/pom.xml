@@ -6,6 +6,7 @@
   <artifactId>slf4j-parent</artifactId>
   <version>1.6.1</version>
   <name>CircularProjectDependencies test</name>
+  <packaging>pom</packaging>
 
   <modules>
     <module>child-a</module>
