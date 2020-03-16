@@ -13,8 +13,6 @@
     <module>child-b</module>
   </modules>
 
-  <packaging>pom</packaging>
-
   <dependencyManagement>
       <dependencies>
          <dependency>
